@@ -1,3 +1,29 @@
+# build transition matrix
+def buildtransitionmatrix(returnstates):
+  transitions = np.zeros((6,6))
+  upwards=0
+  downwards=0
+  # iterate through return
+  n = len(returnstates)
+  for i in range(n-1):
+    prev = returnstates[i]
+    next = returnstates[i+1]
+    transitions[prev, next] = transitions[prev,next]+1
+    # count the upward transitions
+    if next < prev:
+      upwards = upwards+1
+    # count the downward transitions
+    if prev > next:
+      downwards = downwards+1
+  # divide by rows
+  n = len(transitions)
+  for i in range(n):
+    rowi = transitions[i,:]
+    s = np.sum(rowi)
+    #print(s)
+    transitions[i] = transitions[i]/s
+  return transitions, upwards, downwards
+  
 def getreturnstates(returns, mu, sd):
   n = len(returns)
   returnstates = []
