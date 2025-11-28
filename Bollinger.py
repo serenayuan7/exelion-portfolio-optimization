@@ -1,7 +1,9 @@
 def bollinger_bands(df):
   import pandas as pd
   import matplotlib.pyplot as plt
+  from returns import get_log_returns
   # Calculate the 20-period Simple Moving Average (SMA)
+  df['returns'] = get_log_returns(df['Close'])
   df['SMA'] = df['Close'].rolling(window=10).mean()
   
   # Calculate the 20-period Standard Deviation (SD)
