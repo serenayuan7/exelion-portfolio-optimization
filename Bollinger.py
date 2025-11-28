@@ -1,13 +1,13 @@
-def bollinger_bands(df):
+def bollinger_bands(df, windowsize=10):
   import pandas as pd
   import matplotlib.pyplot as plt
   from returns import get_log_returns
   # Calculate the 20-period Simple Moving Average (SMA)
   df['returns'] = get_log_returns(df['Close'])
-  df['SMA'] = df['Close'].rolling(window=10).mean()
+  df['SMA'] = df['Close'].rolling(window= windowsize).mean()
   
   # Calculate the 20-period Standard Deviation (SD)
-  df['SD'] = df['Close'].rolling(window=10).std()
+  df['SD'] = df['Close'].rolling(window= windowsize).std()
   
   # Calculate the Upper Bollinger Band (UB) and Lower Bollinger Band (LB)
   df['UB'] = df['SMA'] + 2 * df['SD']
