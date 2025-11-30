@@ -8,6 +8,7 @@ def get_returns(prices):
   return returns
 
 def get_log_returns(prices):
+  import numpy as np
   n = len(prices)
   returns = []
   for i in range(1, n):
