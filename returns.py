@@ -1,3 +1,4 @@
+import numpy as np
 def get_returns(prices):
   n = len(prices)
   returns = []
