@@ -10,6 +10,7 @@ def get_returns(prices):
 def get_log_returns(prices):
   n = len(prices)
   returns = []
+  returns.append(0)
   for i in range(1, n):
     logret = np.log(prices[i]) - np.log(prices[i-1])
     returns.append(logret)
