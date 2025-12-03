@@ -2,10 +2,12 @@ def rsi_oscillator(df):
   df['SMA200'] = df['Value'].rolling(window=200).mean()
   df['RSI'] = rsi_calculate(df)
   signals=[]
-if rsi_val < 30 and prices[i] > sma200:
-  signals.append(1) #buy
-# exit the market when rsi > 70 and price below sma200
-elif rsi_val > 70 and prices[i] < sma200:
-  signals.append(-1)
-else:
-  signals.append(0)
+  if rsi_val < 30 and prices[i] > sma200:
+    signals.append(1) #buy
+  # exit the market when rsi > 70 and price below sma200
+  elif rsi_val > 70 and prices[i] < sma200:
+    signals.append(-1)
+  else:
+    signals.append(0)
+  df['Signal'] = signals
+  return df
