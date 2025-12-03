@@ -18,3 +18,30 @@ def rsi(prices):
   rel_strength = ag/al
   rsi = 100 - (100/(1+rel_strength))
   return rsi
+
+import pandas as pd
+
+def calculate_rsi(prices, period=14):
+    """
+    Calculates the Relative Strength Index (RSI) for a given series of prices.
+
+    Args:
+        prices (pd.Series): A series of closing prices.
+        period (int): The number of periods for the RSI calculation (default: 14).
+
+    Returns:
+        pd.Series: A series containing the RSI values.
+    """
+    deltas = prices.diff()
+
+    gains = deltas.mask(deltas < 0, 0)
+    losses = -deltas.mask(deltas > 0, 0)
+
+    # Initial averages (simple moving average for the first 'period' values)
+    avg_gain = gains.ewm(com=period - 1, adjust=False).mean()
+    avg_loss = losses.ewm(com=period - 1, adjust=False).mean()
+
+    rs = avg_gain / avg_loss
+    rsi = 100 - (100 / (1 + rs))
+
+    return rsi
