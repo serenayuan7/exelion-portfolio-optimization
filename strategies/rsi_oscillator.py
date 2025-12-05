@@ -1,6 +1,6 @@
 from rsi import calculate_rsi
 def rsi_oscillator(df):
-  df['SMA200'] = df['Value'].rolling(window=200).mean()
+  df['SMA200'] = df['Close'].rolling(window=200).mean()
   df['RSI'] = calculate_rsi(df)
   signals=[]
   if rsi_val < 30 and prices[i] > sma200:
